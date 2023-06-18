@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Build the Docker image
                 script {
-                    def dockerImage = docker.build('webapp', './home/ubuntu/Dockerfile')
+                    def dockerImage = sudo -E docker.build('webapp', './home/ubuntu/Dockerfile')
                 }
             }
         }
