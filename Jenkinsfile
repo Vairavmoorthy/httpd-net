@@ -5,29 +5,28 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the Git repository containing the Dockerfile
-                sh 'git clone -b main   https://github.com/Vairavmoorthy/httpd-net.git'
+                git  'https://github.com/your/repository.git'
             }
         }
 
-        stage('Test docker  Image') {
+        stage('Build Docker Image') {
             steps {
                 // Build the Docker image
-                sh 'echo Docker image found'
+                sh 'echo docker image found'
+            }
+        }
+
+
+
+        stage('Deploy to Remote Machine') {
+            steps {
+                // Load SSH credentials
+                sshagent(['ubuntu']) {
+                    // Run SSH commands on the remote machine
+                    sshCommand remote: '3.110.90.211', command: 'docker pull webapp'
+                    sshCommand remote: '3.110.90.211', command: 'docker run -d -p 9090:80 webapp'
+                }
             }
         }
     }
-
-
-
-    stage('Deploy to Remote Machine') {
-        steps {
-            // Load SSH credentials
-            sshagent(['ubuntu']) {
-                // Run SSH commands on the remote machine
-                sshCommand remote: '3.110.90.211', command: 'docker pull webapp'
-                sshCommand remote: '3.110.90.211', command: 'docker run -d -p 9090:80 webapp'
-            }
-        }
-    }
-}
 }
