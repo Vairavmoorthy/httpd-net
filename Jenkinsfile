@@ -5,9 +5,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the Git repository containing the Dockerfile
-                git  'https://github.com/your/repository.git'
+                sh 'git clone -b main   https://github.com/Vairavmoorthy/httpd-net.git'
             }
         }
+
 
         stage('Build Docker Image') {
             steps {
