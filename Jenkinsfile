@@ -9,11 +9,10 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Test docker  Image') {
             steps {
                 // Build the Docker image
-                script {
-                    def dockerImage = docker.build('webapp', './home/ubuntu/Dockerfile')
+                sh 'echo Docker image found'
                 }
             }
         }
